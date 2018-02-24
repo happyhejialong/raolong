@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.bfwk.mapper.UserMapper">
+	<select id="findUserByUsernameAndPassword" resultType="User">
+		select * from user_p where username=#{username} and password=#{password}
+	</select>
+	<update id="updateUserLoginTime">
+		update user_p set login_time=#{loginTime}
+	</update>
+	<select id="findAllUser" resultType="User">
+		select * from user_p limit #{number},10
+	</select>
+	<select id="findUserByUsername" resultType="User">
+		select * from user_p where username=#{username}
+	</select>
+	<select id="findAllUserPermissions" resultType="string">
+		select permission from user_permission_p where user_id=#{id}
+	</select>
+	<update id="updateBalance">
+		update user_p set balance=balance+#{balance} where card_id=#{cardID}
+	</update>
+</mapper>
