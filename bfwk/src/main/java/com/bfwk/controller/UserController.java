@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bfwk.common.BindingResultUtils;
+import com.bfwk.common.WkResponse;
 import com.bfwk.common.validate.Update;
-import com.bfwk.pojo.User;
+import com.bfwk.model.User;
 import com.bfwk.service.UserService;
 
 @Controller
@@ -22,47 +24,65 @@ import com.bfwk.service.UserService;
 public class UserController {
     @Autowired
     private UserService userService;
-
+    /***
+     * 修改用户信息
+     * @param user
+     * @param bindResult
+     * @return
+     */
     @RequestMapping("/modifyUser")
-    public String modifyUser(@Validated({ Update.class }) User user, BindingResult bindResult) {
-        // userService.modifyUser(user);
-        /**
-         * @Validated获取的errors if (bindResult.hasErrors()) { List<FieldError> fiedErrorList =
-         *                     bindResult.getFieldErrors(); for (FieldError error : fiedErrorList) {
-         *                     System.out.println(error.getDefaultMessage()); } }
-         */
-
-        return null;
+    public String modifyUser(Model model,@Validated({ Update.class }) User user, BindingResult result) {
+       WkResponse<User> wr=new WkResponse<User>();
+       try{
+    	   BindingResultUtils.cacheError(result);
+    	   userService.update(user);
+       }catch(Exception e){
+    	   wr.setCode(e.hashCode());
+    	   wr.setMsg(e.getMessage());
+       }
+       model.addAttribute("result",wr);
+       return null;
     }
-
+    
+    /****
+     * 查询用户列表
+     * @param model
+     * @param number
+     * @return
+     */
     @RequestMapping("/toRight")
     public String toRight(Model model, @RequestParam(defaultValue = "1") int number) {
         List<User> userList = userService.findAllUser(number);
         model.addAttribute("userList", userList);
         return "right";
     }
-
-    @RequestMapping("/testJsonp")
-    @ResponseBody
-    public Object test(String callback) {
-        List<User> userList = userService.findAllUser(1);
-        MappingJacksonValue jsonp = new MappingJacksonValue(userList);
-        jsonp.setJsonpFunction("testJsonp");
-        return jsonp;
-    }
-
+  
+    
+    /****
+     * 充值
+     * @param cardID
+     * @param money
+     * @param model
+     * @return
+     */
     @RequestMapping("/recharge")
     @ResponseBody
-    public boolean rechargeMoney(@Validated({ Update.class }) String cardID, Double money, Model model) {
-        if (StringUtils.isEmpty(cardID) || money <= 0) {
-            model.addAttribute("erroMsg", "参数异常");
-            return false;
+    public  WkResponse<User>  rechargeMoney(@Validated({ Update.class }) String cardID, Double money, Model model) {
+        WkResponse<User> wr=new  WkResponse<User>();  
+    	if (StringUtils.isEmpty(cardID) || money <= 0) {
+            wr.setCode(400);
+    		wr.setMsg("参数异常");
+    		return wr;
         }
-        if (userService.updateBalance(cardID, money)) {
+        try{
+        	userService.updateBalance(cardID, money);
             new WebSocketController().sendMessage(cardID + "充值成功，成功充值" + money + "元");
-            return true;
+        }catch(Exception e){
+        	e.printStackTrace();
+        	wr.setCode(e.hashCode());
+        	wr.setMsg(e.getMessage());
+        	
         }
-        model.addAttribute("erroMsg", "查无用户");
-        return false;
+        return wr;
     }
 }

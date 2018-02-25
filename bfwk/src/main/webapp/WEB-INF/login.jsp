@@ -1,16 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>欢迎登录后台管理系统</title>
 <link href="${app}/static/css/style.css" rel="stylesheet" type="text/css" />
-<script src="C:/Users/Administrator/Downloads/jquery-validation-1.14.0"></script>
-<script src="C:/Users/Administrator/Downloads/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
-<script language="JavaScript" src="${app}/static/js/jquery.js"></script>
-<script src="${app}/static/js/cloud.js" type="text/javascript"></script>
-<script language="javascript">
+<script  src="${app}/static/js/jquery.js"></script>
+<script src="${app}/static/js/cloud.js" type="text/javascript"></script> 
+<script>
 	$(function(){
     $('.loginbox').css({'position':'absolute','left':($(window).width()-692)/2});
 	$(window).resize(function(){  

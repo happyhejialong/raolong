@@ -13,7 +13,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.bfwk.pojo.User;
+import com.bfwk.model.User;
 import com.bfwk.service.UserService;
 
 public class AuthRealm extends AuthorizingRealm{

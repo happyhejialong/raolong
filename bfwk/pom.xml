@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.wdgj</groupId>
-  <artifactId>bfwf</artifactId>
+  <artifactId>bfwk</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>bfwf Maven Webapp</name>
@@ -15,9 +15,9 @@
   <properties>
             <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
             <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-            <java.version>1.8</java.version>
+            <java.version>1.7</java.version>
   </properties>
-  <dependencies>  
+  <dependencies>   
       <dependency>
             <scope>provided</scope> 
             <groupId>org.springframework.boot</groupId>
@@ -89,6 +89,33 @@
            <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-mail</artifactId>
     </dependency>
+    
+    <dependency>  
+            <groupId>org.apache.shiro</groupId>  
+            <artifactId>shiro-core</artifactId>  
+            <version>1.2.3</version>  
+        </dependency>  
+        <dependency>  
+            <groupId>org.apache.shiro</groupId>  
+            <artifactId>shiro-web</artifactId>  
+            <version>1.2.3</version>  
+        </dependency>  
+        <dependency>  
+            <groupId>org.apache.shiro</groupId>  
+            <artifactId>shiro-spring</artifactId>  
+            <version>1.2.3</version>  
+        </dependency>  
+        
+           <dependency>
+           <groupId>org.apache.tomcat.embed</groupId>
+           <artifactId>tomcat-embed-jasper</artifactId>
+           <scope>provided</scope>
+       </dependency>
+        <!-- jsp标签库 -->
+        <dependency>
+           <groupId>javax.servlet</groupId>
+           <artifactId>jstl</artifactId>
+       </dependency>
   </dependencies>
   <build>
     <finalName>OMS</finalName>

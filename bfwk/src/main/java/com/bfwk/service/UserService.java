@@ -3,18 +3,21 @@ package com.bfwk.service;
 
 import java.util.List;
 
-import com.bfwk.pojo.User;
+import com.bfwk.exception.WkException;
+import com.bfwk.model.User;
 
 public interface UserService {
 
-	User findUserByUsernameAndPassword(String username, String password);
+	User findUserByUsernameAndPassword(String username, String password) throws Exception;
 
 	List<User> findAllUser(int number);
 
 	User findUserByUsername(String username);
 
-	List<String> findAllUserPermissions(String id);
+	List<String> findAllUserPermissions(Integer id);
 
-	boolean updateBalance(String cardID, Double balance);
+	void updateBalance(String cardID, Double balance) throws WkException;
+
+	void update(User user) throws Exception;
 
 }

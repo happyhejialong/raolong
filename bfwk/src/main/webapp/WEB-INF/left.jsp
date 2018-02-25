@@ -44,15 +44,9 @@ $(function(){
     	<ul class="menuson">
     	
         <li class="active"><cite></cite><a href="/page/toindex" target="rightFrame">首页模版</a><i></i></li>
-       <shiro:hasPermission name="userList">
         <li><cite></cite><a href="/user/toRight" target="rightFrame">用户列表</a><i></i></li>
-       </shiro:hasPermission>
-       <shiro:hasPermission name="userRecharge">
         <li><cite></cite><a href="/page/torecharge" target="rightFrame" id="recharge">用户充值</a><i></i></li>
-       </shiro:hasPermission>
-       <shiro:hasPermission name="registerUser">
         <li><cite></cite><a href="/page/toregister" target="rightFrame">用户注册</a><i></i></li>
-       </shiro:hasPermission>
        <!--  
         <li><cite></cite><a href="/page/toimglist" target="rightFrame">图片列表</a><i></i></li>
         <li><cite></cite><a href="/page/toimglist1" target="rightFrame">自定义</a><i></i></li>

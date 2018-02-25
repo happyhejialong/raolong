@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.bfwk.pojo.User;
+import com.bfwk.model.User;
 import com.bfwk.service.UserService;
 
 @Controller
@@ -28,23 +28,18 @@ public class LoginController {
 			model.addAttribute("errorMsg","用户名密码不为空");
 			return "login";
 		}
-		UsernamePasswordToken token=new UsernamePasswordToken(username,password);
-		Subject subject=SecurityUtils.getSubject();
-		try {
-			subject.login(token);
-			User user=(User) subject.getPrincipal();
+		try{
+			User user=userService.findUserByUsernameAndPassword(username, password);
+	//	UsernamePasswordToken token=new UsernamePasswordToken(username,password);
+	//	Subject subject=SecurityUtils.getSubject();
+	//	try {
+	//		subject.login(token);
+	//		User user=(User) subject.getPrincipal();
 			session.setAttribute("user", user);
 		}catch(Exception e) {
 			model.addAttribute("errorMsg","用户名密码输入错误");
 			return "login";
 		}
-		/*User user=userService.findUserByUsernameAndPassword(username,password);
-		if(user==null) {
-			model.addAttribute("errorMsg","用户名密码输入错误");
-			return "login";
-		}
-		session.setAttribute("user",user);
-		return "main";*/
 		return "main";
 	}
 	@RequestMapping("/logout")

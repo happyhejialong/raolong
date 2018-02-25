@@ -89,7 +89,7 @@ $(document).ready(function(){
         	<c:if test="${fn:trim(user.gender) eq 'W'}"><font style='color:pink'>女</font></c:if>
         </td>
         <td><fmt:formatNumber type="NUMBER" value="${user.balance }"/></td>
-        <td>${user.loginTime }</td>
+        <td>1234</td>
         <td>${user.level }</td>
         <td><a href="#" class="tablelink">查看</a>     <a href="#" class="tablelink"> 删除</a></td>
         </tr> 

@@ -12,7 +12,11 @@ $(function(){
 	$("#btn1").click(function(){
 		var cardID=$("input[name='cardID']").val();
 		var money=$("input[name='money']").val();
-		$.post("/user/recharge",{'cardID':cardID,'money':money});
+		$.post("/user/recharge",{'cardID':cardID,'money':money},function(result){
+			if(result.code=='200'){
+				alert('充值成功');
+			}
+		});
 	});
 	//导航切换
 	$(".imglist li").click(function(){
@@ -91,19 +95,7 @@ $(document).ready(function(){
     </div>
     
     <table class="imgtable">
-    
-    <thead>
-    <tr>
-    <th width="100px;">头像</th>
-    <th></th>
-    <th></th>
-    <th>充值金额</th>
-    <th></th>
-    <th>是否审核</th>
-    <th>点击</th>
-    </tr>
-    </thead>
-    
+   
     <tbody>
     <tr>
   		<td>头像</td>
@@ -115,7 +107,7 @@ $(document).ready(function(){
   	</tr>
   	<tr>
   		<td>身份证号</td>
-  		<td><input type="text" name="cardID" value="${user.cardID}" readonly="readonly"/></td>
+  		<td><input type="text" name="cardID" value="${user.cardId}" readonly="readonly"/></td>
   	</tr>
   	<tr>
   		<td>充值金额</td>
