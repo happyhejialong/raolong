@@ -92,5 +92,16 @@ public class UserServiceImpl implements UserService{
 			throw new WkException("修改用户记录数失败");
 		}
 	}
+	/****
+	 * 注册用户
+	 * @throws Exception 
+	 */
+	@Override
+	public void register(User user) throws Exception {
+		int insertUserFlag=userMapper.insert(user);
+		if(insertUserFlag!=1){
+			throw new WkException("新增记录不为1，失败");
+		}
+	}
 
 }

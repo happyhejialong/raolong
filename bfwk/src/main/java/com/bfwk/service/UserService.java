@@ -20,4 +20,6 @@ public interface UserService {
 
 	void update(User user) throws Exception;
 
+	void register(User user) throws Exception;
+
 }

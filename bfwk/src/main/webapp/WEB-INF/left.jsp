@@ -61,32 +61,40 @@ $(function(){
     
     <dd>
     <div class="title">
-    <span><img src="${app}/static/images/leftico02.png" /></span>其他设置
+    <span><img src="${app}/static/images/leftico02.png" /></span>网吧商城
     </div>
     <ul class="menuson">
-        <li><cite></cite><a href="#">编辑内容</a><i></i></li>
-        <li><cite></cite><a href="#">发布信息</a><i></i></li>
-        <li><cite></cite><a href="#">档案列表显示</a><i></i></li>
+        <li><cite></cite><a href="#" target="rightFrame">食品</a><i></i></li>
+        <li><cite></cite><a href="#" target="rightFrame">点卡</a><i></i></li>
+        <li><cite></cite><a href="#" target="rightFrame">呼叫网管</a><i></i></li>
         </ul>     
     </dd> 
     
     
-    <dd><div class="title"><span><img src="${app}/static/images/leftico03.png" /></span>编辑器</div>
+    <dd><div class="title"><span><img src="${app}/static/images/leftico03.png" /></span>货品管理</div>
     <ul class="menuson">
-        <li><cite></cite><a href="#">自定义</a><i></i></li>
-        <li><cite></cite><a href="#">常用资料</a><i></i></li>
-        <li><cite></cite><a href="#">信息列表</a><i></i></li>
-        <li><cite></cite><a href="#">其他</a><i></i></li>
+        <li><cite></cite><a href="/page/toadd_product" target="rightFrame">添加货品</a><i></i></li>
+        <li><cite></cite><a href="/product/list" target="rightFrame">货品列表</a><i></i></li>
+        <li><cite></cite><a href="#" target="rightFrame">修改货品</a><i></i></li>
+        <li><cite></cite><a href="#" target="rightFrame">其他</a><i></i></li>
+    </ul>    
+    </dd>  
+    
+    <dd><div class="title"><span><img src="${app}/static/images/leftico03.png" /></span>管理</div>
+    <ul class="menuson">
+        <li><cite></cite><a href="#" target="rightFrame">修改费率</a><i></i></li>
+         <li><cite></cite><a href="#" target="rightFrame">服务平台</a><i></i></li>
+          <li><cite></cite><a href="#" target="rightFrame">工作考勤</a><i></i></li>
     </ul>    
     </dd>  
     
     
     <dd><div class="title"><span><img src="${app}/static/images/leftico04.png" /></span>日期管理</div>
     <ul class="menuson">
-        <li><cite></cite><a href="#">自定义</a><i></i></li>
-        <li><cite></cite><a href="#">常用资料</a><i></i></li>
-        <li><cite></cite><a href="#">信息列表</a><i></i></li>
-        <li><cite></cite><a href="#">其他</a><i></i></li>
+        <li><cite></cite><a href="#" target="rightFrame">自定义</a><i></i></li>
+        <li><cite></cite><a href="#" target="rightFrame">常用资料</a><i></i></li>
+        <li><cite></cite><a href="#" target="rightFrame">信息列表</a><i></i></li>
+        <li><cite></cite><a href="#" target="rightFrame">其他</a><i></i></li>
     </ul>
     
     </dd>   
