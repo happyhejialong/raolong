@@ -6,6 +6,6 @@
      <javaModelGenerator targetPackage="com.bfwk.model" targetProject="bfwk/src/main/java" />
     <sqlMapGenerator targetPackage="mapper" targetProject="bfwk/src/main/resources" />
 <javaClientGenerator targetPackage="com.bfwk.mapper" targetProject="bfwk/src/main/java"  type="XMLMAPPER" />
-     <table  tableName="permission"></table>
+     <table  tableName="trade_goods"></table>
   </context>
 </generatorConfiguration>

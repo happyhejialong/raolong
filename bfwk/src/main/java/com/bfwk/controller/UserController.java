@@ -6,13 +6,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,35 +29,38 @@ import com.bfwk.service.UserService;
 public class UserController {
     @Autowired
     private UserService userService;
-    
-    @InitBinder  
-    public void initBinder(WebDataBinder binder) {  
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
-        dateFormat.setLenient(false);  
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));   
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
+
     /***
      * 修改用户信息
+     * 
      * @param user
      * @param bindResult
      * @return
      */
     @RequestMapping("/modifyUser")
-    public String modifyUser(Model model,@Validated({ Update.class }) User user, BindingResult result) {
-       WkResponse<User> wr=new WkResponse<User>();
-       try{
-    	   BindingResultUtils.cacheError(result);
-    	   userService.update(user);
-       }catch(Exception e){
-    	   wr.setCode(e.hashCode());
-    	   wr.setMsg(e.getMessage());
-       }
-       model.addAttribute("result",wr);
-       return null;
+    public String modifyUser(Model model, @Validated({ Update.class }) User user, BindingResult result) {
+        WkResponse<User> wr = new WkResponse<User>();
+        try {
+            BindingResultUtils.cacheError(result);
+            userService.update(user);
+        } catch (Exception e) {
+            wr.setCode(e.hashCode());
+            wr.setMsg(e.getMessage());
+        }
+        model.addAttribute("result", wr);
+        return null;
     }
-    
+
     /****
      * 查询用户列表
+     * 
      * @param model
      * @param number
      * @return
@@ -68,10 +71,10 @@ public class UserController {
         model.addAttribute("userList", userList);
         return "right";
     }
-  
-    
+
     /****
      * 充值
+     * 
      * @param cardID
      * @param money
      * @param model
@@ -79,35 +82,49 @@ public class UserController {
      */
     @RequestMapping("/recharge")
     @ResponseBody
-    public  WkResponse<User>  rechargeMoney(@Validated({ Update.class }) String cardID, Double money, Model model) {
-        WkResponse<User> wr=new  WkResponse<User>();  
-    	if (StringUtils.isEmpty(cardID) || money <= 0) {
+    public WkResponse<User> rechargeMoney(@Validated({ Update.class }) String cardID, Double money, Model model) {
+        WkResponse<User> wr = new WkResponse<User>();
+        if (StringUtils.isEmpty(cardID) || money <= 0) {
             wr.setCode(400);
-    		wr.setMsg("参数异常");
-    		return wr;
+            wr.setMsg("参数异常");
+            return wr;
         }
-        try{
-        	userService.updateBalance(cardID, money);
+        try {
+            userService.updateBalance(cardID, money);
             new WebSocketController().sendMessage(cardID + "充值成功，成功充值" + money + "元");
-        }catch(Exception e){
-        	e.printStackTrace();
-        	wr.setCode(e.hashCode());
-        	wr.setMsg(e.getMessage());
-        	
+        } catch (Exception e) {
+            e.printStackTrace();
+            wr.setCode(e.hashCode());
+            wr.setMsg(e.getMessage());
+
         }
         return wr;
     }
+
     @RequestMapping("/register")
     @ResponseBody
-    public WkResponse<User> register(User user){
-    	WkResponse<User> wr=new WkResponse<User>();
-    	try{
-    		userService.register(user);
-    	}catch(Exception e){
-    		e.printStackTrace();
-    		wr.setCode(e.hashCode());
-    		wr.setMsg(e.getMessage());
-    	}
-    	return wr;
+    public WkResponse<User> register(User user) {
+        WkResponse<User> wr = new WkResponse<User>();
+        try {
+            userService.register(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            wr.setCode(e.hashCode());
+            wr.setMsg(e.getMessage());
+        }
+        return wr;
+    }
+
+    @GetMapping("/delete")
+    public WkResponse<User> delete(Integer[] id) {
+        WkResponse<User> wr = new WkResponse<User>();
+        try {
+            userService.delete(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            wr.setCode(e.hashCode());
+            wr.setMsg(e.getMessage());
+        }
+        return wr;
     }
 }

@@ -7,9 +7,13 @@ import com.bfwk.model.Product;
 
 public interface ProductService {
 
-	void add(Product product) throws WkException ;
+    void add(Product product) throws WkException;
 
-	List<Product> list(int pageIndex);
+    List<Product> list(int pageIndex);
 
+    /**
+     * @param product
+     */
+    void modify(Product product) throws Exception;
 
 }

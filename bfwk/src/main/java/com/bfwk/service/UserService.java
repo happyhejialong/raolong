@@ -1,6 +1,5 @@
 package com.bfwk.service;
 
-
 import java.util.List;
 
 import com.bfwk.exception.WkException;
@@ -8,18 +7,23 @@ import com.bfwk.model.User;
 
 public interface UserService {
 
-	User findUserByUsernameAndPassword(String username, String password) throws Exception;
+    User findUserByUsernameAndPassword(String username, String password) throws Exception;
 
-	List<User> findAllUser(int number);
+    List<User> findAllUser(int number);
 
-	User findUserByUsername(String username);
+    User findUserByUsername(String username);
 
-	List<String> findAllUserPermissions(Integer id);
+    List<String> findAllUserPermissions(Integer id);
 
-	void updateBalance(String cardID, Double balance) throws WkException;
+    void updateBalance(String cardID, Double balance) throws WkException;
 
-	void update(User user) throws Exception;
+    void update(User user) throws Exception;
 
-	void register(User user) throws Exception;
+    void register(User user) throws Exception;
+
+    /**
+     * @param id
+     */
+    void delete(Integer[] id) throws Exception;
 
 }
